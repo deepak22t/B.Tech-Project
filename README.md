@@ -1,92 +1,95 @@
-# Flask Authentication and Data Storage Application
 
-This project is a Flask web application featuring user authentication, data storage, and management. It includes functionalities for user registration, login, data storage, and retrieval. Additionally, it provides a simple task management feature.
+# AcadBot: Advanced RAG-based Academic Assistant
 
-## Features
+AcadBot is an intelligent **Retrieval-Augmented Generation (RAG)** platform designed to provide precise, context-aware answers to college-related queries. By leveraging high-density vector embeddings and Large Language Models (LLMs), AcadBot transforms static college documents into an interactive, searchable knowledge base.
 
-- **User Authentication**: Users can register, log in, and log out. Passwords are securely hashed.
-- **Data Storage**: Authenticated users can store and manage their data.
-- **Task Management**: Users can add, edit, and delete tasks.
-- **Responsive Design**: The interface is designed to be user-friendly and responsive.
+## 🚀 Key Features
 
-## Technologies Used
-
-- **Flask**: Web framework for building the application.
-- **SQLAlchemy**: ORM for database interactions.
-- **SQLite**: Database for storing user and task data.
-- **HTML/CSS**: Frontend technologies for designing the user interface.
-- **Flask-SCSS**: For compiling SCSS files into CSS.
-
-## Installation
-
-Follow these steps to set up and run the project locally:
-
-1. **Clone the Repository**
-
-   ```bash
-   git clone https://github.com/Deepak-Kumar-1764/your-repository-name.git
-   cd your-repository-name
+* **Semantic Search & Retrieval**: Uses **Sentence-Transformers** to convert raw documents into high-dimensional vector embeddings, allowing for context-aware similarity searches rather than simple keyword matching.
+* **Contextual Intelligence**: Powered by the **Cohere LLM**, the system generates natural language responses strictly grounded in the retrieved document context to minimize hallucinations.
+* **End-to-End RAG Pipeline**:
+* **Ingestion**: Processes PDF/Text college documents.
+* **Chunking**: Breaks data into optimized segments for better retrieval granularity.
+* **Similarity Search**: Performs ranking to find the most relevant "top-k" chunks based on user intent.
 
 
-## Setup
+* **Secure User Ecosystem**: Complete authentication system with hashed credentials and personalized query history.
+* **Task & Query Management**: Integrated dashboard for users to manage specific academic tasks alongside their AI assistant.
+
+## 🛠 Tech Stack
+
+* **LLM**: Cohere (Command Model)
+* **Embeddings**: Sentence-Transformers (`all-MiniLM-L6-v2`)
+* **Backend**: Flask (Python)
+* **Database**: SQLite (Metadata) & Vector-based Similarity Search
+* **ORM**: SQLAlchemy
+* **Frontend**: HTML5, CSS3 (SCSS), Jinja2 templates
+
+## 🏗 System Architecture
+
+1. **Data Ingestion**: College-specific documents are uploaded and pre-processed.
+2. **Embedding Generation**: The `SentenceTransformer` model encodes text chunks into vectors.
+3. **User Query**: When a user asks a question, their query is embedded into the same vector space.
+4. **Similarity Search**: The system calculates the cosine similarity to retrieve the most relevant chunks from the local knowledge base.
+5. **Augmented Generation**: The retrieved chunks and the original query are sent to **Cohere LLM** to produce a concise, factual answer.
+
+## 🔧 Installation & Setup
 
 ### Prerequisites
 
-- Python 3.x
-- Flask
-- Flask-SQLAlchemy
-- Flask-Migrate
+* Python 3.8+
+* Cohere API Key
 
-### Installation
+### Setup Steps
 
 1. **Clone the Repository**
+```bash
+git clone https://github.com/Deepak-Kumar-1764/AcadBot.git
+cd AcadBot
 
-   ```bash
-   git clone https://github.com/your-username/your-repository.git
-   cd your-repository
-2. **Create a Virtual Environment**
-   ```bash
-   python -m venv venv
+```
 
-3. **Activate the Virtual Environment**
-  - Windows
-    ```bash
-    venv\Scripts\activate
-  - macOs/Linux
-    ```bash 
-    source venv/bin/activate
-4. **Install Dependencies**
-    ```bash
-    pip install -r requirements.txt
 
-# Configuration
-  ## Set Up the Flask Application
-  Ensure your Flask app is configured correctly. For development purposes, you can set the SECRET_KEY and database URI directly in your app.py or config.py.
-# Database Migrations
-   Flask-Migrate is used to handle database schema changes. Follow these steps to initialize and manage your database:
-  1. **Initialize the Migration Repository**
-       This creates the migrations folder which will contain the migration scripts.
-      ```bash
-     flask db init
-  2. **Create a Migration Script**
-      This command auto-generates a migration script based on changes detected in your models.
-      ```bash
-     flask db migrate -m "Initial Migration"
-  3. **Apply the Migrationt**
-    This updates the database schema based on the migration script.
-      ```bash
-      flask db upgrade
- 4. **Apply the Migrationt**
-   This rolls back the database schema to the previous version.
-      ```bash
-      flask db downgrade
-# Running the Application
-  To start the Flask application, use:
-  ```bash
-    flask run
+2. **Environment Configuration**
+Create a `.env` file in the root directory:
+```env
+COHERE_API_KEY=your_api_key_here
+SECRET_KEY=your_flask_secret_key
+DATABASE_URL=sqlite:///acadbot.db
+
+```
+
+
+3. **Install Dependencies**
+```bash
+pip install -r requirements.txt
+
+```
+
+
+4. **Initialize Database & Migrations**
+```bash
+flask db init
+flask db migrate -m "Setup RAG schema"
+flask db upgrade
+
+```
+
+
+5. **Run the Application**
+```bash
+flask run
+
+```
 
 
 
+## 📈 Future Roadmap
 
-   
+* [ ] Integration with **Qdrant** or **FAISS** for scalable vector storage.
+* [ ] Support for multi-modal documents (extracting data from tables/images).
+* [ ] Mobile application deployment via **React Native**.
 
+---
+
+**Would you like me to create the shortened LaTeX version of this project for your resume now?**
